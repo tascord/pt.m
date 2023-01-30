@@ -1,42 +1,9 @@
-# Nuxt 3 Minimal Starter
+# Public transport (in) Melbourne
+Aiming to be home to data curated from several official sources, to decrease the amount of searching one may have to do.
+Also I'm going to write little articles about things that I fancy :3
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Run locally
+1. Install `npm i`
+2. Run development server `npm run dev`
+3. Build `npm run build`
+4. Preview build `npm run preview`
