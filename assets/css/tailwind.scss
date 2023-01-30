@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$blue: hsl(212, 100%, 67%);
+$light-blue: hsl(194, 100%, 68%);
+$red: hsl(0, 100%, 70%);
+$yellow: hsl(39, 100%, 71%);
+$green: hsl(130, 100%, 67%);
+$pink: hsl(327, 100%, 73%);
+$grey: hsl(0, 0%, 57%);
+
+@layer components {
+
+    a {
+        @apply text-purple-300 hover:text-purple-400 transition-colors;
+    }
+
+    nav a {
+        @apply text-white;
+    }
+
+    .good>div>svg>g {
+        @apply stroke-green-400;
+    }
+
+    .eh>div>svg>g {
+        @apply stroke-orange-400;
+    }
+
+    .bad>div>svg>g {
+        @apply stroke-red-400;
+    }
+
+}
+
+.Blue {
+    color: $blue;
+}
+
+.LightBlue {
+    color: $light-blue;
+}
+
+.Red {
+    color: $red;
+}
+
+.Yellow {
+    color: $yellow;
+}
+
+.Green {
+    color: $green;
+}
+
+.Pink {
+    color: $pink;
+}
+
+.Grey {
+    color: $grey;
+}
+
+.Multi {
+    $deg: 100deg;
+    background: transparent;
+
+    &.Yellow-Green {
+        background: linear-gradient($deg, $yellow 0%, $green 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Green-LightBlue {
+        background: linear-gradient($deg, $green 0%, $light-blue 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Yellow-Green-Grey {
+        background: linear-gradient($deg, $yellow 0%, $green 50%, $grey 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Green-Grey {
+        background: linear-gradient($deg, $green 0%, $grey 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Pink-Green-LightBlue {
+        background: linear-gradient($deg, $pink 0%, $green 50%, $light-blue 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Pink-Green-LightBlue-Blue {
+        background: linear-gradient($deg, $pink 0%, $green 33%, $light-blue 66%, $blue 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.LightBlue-Pink-Yellow-Blue-Red {
+        background: linear-gradient($deg, $light-blue 0%, $pink 25%, $yellow 50%, $blue 75%, $red 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Green-LightBlue-Pink-Yellow-Grey-Blue-Red {
+        background: linear-gradient($deg, $green 0%, $light-blue 16%, $pink 33%, $yellow 50%, $blue 66%, $red 83%, $grey 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &.Green-LightBlue-Yellow-Grey-Blue-Red {
+        background: linear-gradient($deg, $green 0%, $light-blue 25%, $yellow 50%, $blue 75%, $grey 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

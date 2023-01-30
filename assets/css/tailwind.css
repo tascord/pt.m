@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  a {
+    @apply text-purple-300 hover:text-purple-400 transition-colors;
+  }
+  nav a {
+    @apply text-white;
+  }
+  .good > div > svg > g {
+    @apply stroke-green-400;
+  }
+  .eh > div > svg > g {
+    @apply stroke-orange-400;
+  }
+  .bad > div > svg > g {
+    @apply stroke-red-400;
+  }
+}
+
+.Blue {
+  color: #57a5ff;
+}
+
+.LightBlue {
+  color: #5cd9ff;
+}
+
+.Red {
+  color: #ff6666;
+}
+
+.Yellow {
+  color: #ffcb6b;
+}
+
+.Green {
+  color: #57ff73;
+}
+
+.Pink {
+  color: #ff75c1;
+}
+
+.Grey {
+  color: #919191;
+}
+
+.Multi {
+  background: transparent;
+}
+
+.Multi.Yellow-Green {
+  background: linear-gradient(100deg, #ffcb6b 0%, #57ff73 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-LightBlue {
+  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Yellow-Green-Grey {
+  background: linear-gradient(100deg, #ffcb6b 0%, #57ff73 50%, #919191 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-Grey {
+  background: linear-gradient(100deg, #57ff73 0%, #919191 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Pink-Green-LightBlue {
+  background: linear-gradient(100deg, #ff75c1 0%, #57ff73 50%, #5cd9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Pink-Green-LightBlue-Blue {
+  background: linear-gradient(100deg, #ff75c1 0%, #57ff73 33%, #5cd9ff 66%, #57a5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.LightBlue-Pink-Yellow-Blue-Red {
+  background: linear-gradient(100deg, #5cd9ff 0%, #ff75c1 25%, #ffcb6b 50%, #57a5ff 75%, #ff6666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-LightBlue-Pink-Yellow-Grey-Blue-Red {
+  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 16%, #ff75c1 33%, #ffcb6b 50%, #57a5ff 66%, #ff6666 83%, #919191 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-LightBlue-Yellow-Grey-Blue-Red {
+  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 25%, #ffcb6b 50%, #57a5ff 75%, #919191 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/*# sourceMappingURL=tailwind.css.map */
