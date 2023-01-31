@@ -1,5 +1,5 @@
 import { Lines } from "~~/databank/Lines";
-import { resolve_code, resolve_name, Station } from "~~/databank/Stations";
+import { resolve_code, resolve_name, Station, Stop } from "~~/databank/Stations";
 
 export default defineEventHandler(event => {
 
@@ -11,7 +11,7 @@ export default defineEventHandler(event => {
     const line = Lines.find(l => l.stops[0].code === station.code);
     if (!line) return { error: "That is a station, not a line." }
 
-    const stops: Station[] = line.stops.map(s => ({ ...resolve_code(s.code)!, priority: s.priority }));
+    const stops: Stop[] = line.stops.map(s => ({ ...resolve_code(s.code)!, priority: s.priority.toJSON() }));
 
     return {
         name: stops[0].name,

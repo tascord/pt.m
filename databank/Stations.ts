@@ -3772,6 +3772,7 @@ export type StationZone = typeof Stations[number]["zone"];
 
 export type Station = typeof Stations[number];
 export type Line = typeof Stations[number]["services"]["lines"][number];
+export type Stop = Station & { priority: number };
 
 export function resolve_code(code: StationCode) {
     return Stations.find((s) => s.code.toLowerCase() === code.toLowerCase());
@@ -3810,7 +3811,7 @@ export const ColourMap: { [colour in LineColour]: Line[] } = {
     'Grey': ['Stony Point', 'Flemington Racecourse'],
 };
 
-export function resolve_colour(lines: Line[]) {
+export function resolve_colour(lines: Line[]|Readonly<Line[]>) {
     const colours = lines.map((line) => Object.entries(ColourMap).find(([, lines]) => lines.includes(line))?.[0]??line as LineColour).filter((v, i, a) => a.indexOf(v) === i);
     if (colours.length === 1) return colours[0];
     else return 'Multi ' + colours.join('-');

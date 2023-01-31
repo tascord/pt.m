@@ -40,14 +40,14 @@ onBeforeMount(() => opened.value = false);
                 child-h2:text-xl child-h2:font-semibold
             ">
                 <span class="
-                    text-opacity-40 text-zinc-800 dark:text-zinc-400
+                    dark:text-opacity-40 text-zinc-800 dark:text-zinc-400
                     font-mono
                     flex
                     select-none
                 ">
                     (
                     <span class="
-                        text-black dark:text-white text-opacity-75 select-text
+                        text-black dark:text-white dark:text-opacity-75 select-text
                         font-semibold
                     ">
                         {{ station.code }}
