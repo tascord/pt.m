@@ -31,6 +31,15 @@ const { data: articles, error } = await useAsyncData('articles', () => queryCont
                     New articles every so often
                 </p>
             </div>
+
+            <ul>
+                <li v-for="article in articles">
+                    <NuxtLink :to="`/article/${article.slug}`">
+                        {{ article.title }}
+                    </NuxtLink>
+                </li>
+            </ul>
+
         </div>
     </div>
 </template>

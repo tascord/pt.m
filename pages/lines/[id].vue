@@ -3,7 +3,7 @@ import Priority from "~/databank/helpers/Priority";
 import { CityLoop, resolve_colour, resolve_name } from "~/databank/Stations";
 
 const route = useRoute();
-const { pending, data: line, } = useAsyncData('lines', () => $fetch(`/api/line/${route.params.id}`));
+const { pending, data: line, } = useAsyncData('lines', () => $fetch(`/api/lines/${route.params.id}`));
 const direction = ref('to_city');
 
 const priority_string = (priority_num: number) => {
@@ -110,7 +110,7 @@ const colour = (rating: number) => {
                                     :text="stop.code === line.stops![line.stops!.length - 1].code ? 'City loop stop.' : 'City loop stop, skipped on direct services.'"
                                     icon="tabler:repeat" />
                             </div>
-                            <NuxtLink :to="`/station/${stop.code}`" :class="
+                            <NuxtLink :to="`/stations/${stop.code}`" :class="
                                 { [resolve_colour(stop.services.lines)]: true, 'font-semibold': true }
                             ">
                                 {{ stop.name }}

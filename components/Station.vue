@@ -9,6 +9,8 @@ const styles = {
         'heir:stroke-purple-400': true,
     },
     default: {
+        'heir:fill-zinc-600': true,
+        'heir:stroke-zinc-600': true,
         'heir:transition-all': true,
         'transition-transform': true,
     }
