@@ -33,9 +33,9 @@ const priority_string = (code) => {
 const colour = (code) => {
 
     const rating = Priority.from(code).rating();
-    if (rating > 2.5) return 'good';
-    if (rating > 0.5) return 'eh';
-    return 'bad';
+    if (rating > 2.5) return 'Service-Most';
+    if (rating > 0.5) return 'Service-Some';
+    return 'Service-Poor';
 
 }
 
@@ -104,7 +104,7 @@ const colour = (code) => {
                                     :text="stop.code === line.stops[line.stops.length - 1].code ? 'City loop stop.' : 'City loop stop, skipped on direct services.'"
                                     icon="tabler:repeat" />
                             </div>
-                            <NuxtLink :to="`/station/${stop.code}`" :class="{[resolve_colour(stop.services.lines)]: true}">
+                            <NuxtLink :to="`/station/${stop.code}`" :class="{[resolve_colour(stop.services.lines)]: true, 'font-semibold': true}">
                                 {{ stop.name }}
                             </NuxtLink>
                         </li>

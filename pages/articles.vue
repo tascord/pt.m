@@ -1,17 +1,15 @@
 <script setup>
-
-const phrases = [
-    `A """definitive""" guide`,
-    `A good place to start`,
-    `Learn something, probably`
-]
-
-const phrase = ref(phrases[Math.random() * phrases.length | 0]);
-
+const { data: articles, error } = await useAsyncData('articles', () => queryContent().find());
 </script>
 
 <template>
-    <div class="
+
+    <Error v-if="error" title="404" description="Unable to find article" back_text="Back to Articles"
+        back_link="/articles" />
+
+    <Loader v-else-if="!articles && !error" />
+
+    <div v-if="articles" class="
         w-full
         flex justify-center
     ">
@@ -25,12 +23,12 @@ const phrase = ref(phrases[Math.random() * phrases.length | 0]);
                     text-black dark:text-white
                     text-2xl font-bold
                 ">
-                    Trains in Melbourne
+                    Articles
                 </h1>
                 <p class="
                     text-black dark:text-white
                 ">
-                    {{ phrase }}
+                    New articles every so often
                 </p>
             </div>
         </div>

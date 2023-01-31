@@ -1,5 +1,5 @@
 <script setup>
-const { pending, data: trains, } = useAsyncData('lines', () => $fetch('/api/lines'));
+const { pending, data: lines, } = useAsyncData('lines', () => $fetch('/api/lines'));
 </script>
 
 <template>
@@ -7,13 +7,40 @@ const { pending, data: trains, } = useAsyncData('lines', () => $fetch('/api/line
 
         <Loader v-if="pending" />
 
-        <ul>
-            <li v-for="train in trains">
-                <nuxt-link :to="`/lines/${train}`" class="text-purple-400">
-                    {{ train }}
-                </nuxt-link>
-            </li>
-        </ul>
+        <div v-if="lines" class="
+            w-full
+            flex justify-center
+        ">
+            <div class="
+                w-[70rem] max-w-full
+            ">
+                <div class="
+                    mb-4
+                ">
+                    <h1 class="
+                        text-black dark:text-white
+                        text-2xl font-bold
+                    ">
+                        Train Lines
+                    </h1>
+                    <p class="
+                        text-black dark:text-white
+                    ">
+                        Service information for all metro lines
+                    </p>
+                </div>
+
+                <ul>
+                    <li v-for="line in lines">
+                        <NuxtLink :to="`/lines/${line}`">
+                            {{ line }}
+                        </NuxtLink>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
 
     </div>
 </template>

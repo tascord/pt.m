@@ -20,7 +20,6 @@ onBeforeMount(() => opened.value = false);
 
 </script>
 
-
 <template>
     <div class="
         flex flex-col
@@ -37,16 +36,20 @@ onBeforeMount(() => opened.value = false);
             </button>
             <div class="
                 flex space-x-2
+                items-center
                 child-h2:text-xl child-h2:font-semibold
             ">
                 <span class="
-                    text-opacity-40 text-zinc-400
+                    text-opacity-40 text-zinc-800 dark:text-zinc-400
                     font-mono
                     flex
                     select-none
                 ">
                     (
-                    <span class="text-white text-opacity-75 select-text">
+                    <span class="
+                        text-black dark:text-white text-opacity-75 select-text
+                        font-semibold
+                    ">
                         {{ station.code }}
                     </span>
                     )
@@ -59,7 +62,7 @@ onBeforeMount(() => opened.value = false);
         <div :style="`display: ${!opened ? 'none' : 'flex'}; margin-bottom: ${!opened ? 0 : '1rem'} `" class="
             space-x-4
             child:child-div:flex child:child-div:flex-col
-            mt-1 ml-[4.75rem]
+            mt-1 lg:ml-[4.75rem]
         ">
             <div>
                 <h2>Group{{ station.services.groups.length === 1 ? '' : 's' }}</h2>

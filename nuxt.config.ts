@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: [
+        '@nuxt/content',
         '@nuxtjs/tailwindcss',
+        '@nuxtjs/color-mode',
         'nuxt-icon',
     ],
 
@@ -15,5 +17,16 @@ export default defineNuxtConfig({
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             ]
         }
+    },
+
+    content: {
+        markdown: {
+            remarkPlugins: {},
+            rehypePlugins: []
+        }
+    },
+
+    colorMode: {
+        classSuffix: ''
     }
 })

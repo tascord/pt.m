@@ -26,7 +26,10 @@ watch(query, () => {
     } else {
         stations.value = data.value as any;
     }
-}, { immediate: true });
+});
+
+// On data change, update stations
+watch(data, () => stations.value = data.value as any);
 
 </script>
 
@@ -38,9 +41,9 @@ watch(query, () => {
     <div v-if="data && !data.error">
 
         <div class="
-            flex
+            flex flex-wrap
             justify-between items-end
-            mt-6 mb-3
+            mt-6 mb-3 space-y-2
         ">
             <h1 class="
                 text-3xl font-bold
@@ -57,14 +60,14 @@ watch(query, () => {
                     px-2
                     w-full max-w-[30rem]
                     flex justify-center items-center space-x-2
-                    outline-white outline-2 outline-offset-2 outline
+                    outline-black dark:outline-white outline-2 outline
                     rounded-xl shadow-xl
-                    focus:ring ring-purple-400
+                    focus:outline-purple-400
                 ">
                     <input type="text" placeholder="Search" v-model="query" class="
                         flex-1
                         bg-transparent
-                        text-white
+                        text-black dark:text-white
                         focus:outline-none
                     " />
                     <Icon name="tabler:search" />

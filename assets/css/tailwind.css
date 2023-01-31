@@ -1,50 +1,143 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+  --blue: hsl(212, 100%, 59%);
+  --light-blue: hsl(194, 100%, 59%);
+  --red: hsl(0, 100%, 62%);
+  --yellow: hsl(39, 100%, 56%);
+  --green: hsl(130, 69%, 52%);
+  --pink: hsl(327, 100%, 63%);
+  --grey: hsl(0, 0%, 44%);
+}
+
+html.dark {
+  --blue: hsl(212, 100%, 67%);
+  --light-blue: hsl(194, 100%, 68%);
+  --red: hsl(0, 100%, 70%);
+  --yellow: hsl(39, 100%, 71%);
+  --green: hsl(130, 100%, 67%);
+  --pink: hsl(327, 100%, 73%);
+  --grey: hsl(0, 0%, 57%);
+}
+
 @layer components {
   a {
-    @apply text-purple-300 hover:text-purple-400 transition-colors;
+    @apply text-purple-500 hover:text-purple-700 dark:text-purple-300 dark:hover:text-purple-500 transition-colors;
   }
   nav a {
-    @apply text-white;
+    @apply text-white dark:text-white hover:text-purple-400;
   }
-  .good > div > svg > g {
+  .Service-Most > div > svg > g {
     @apply stroke-green-400;
   }
-  .eh > div > svg > g {
+  .Service-Some > div > svg > g {
     @apply stroke-orange-400;
   }
-  .bad > div > svg > g {
+  .Service-Poor > div > svg > g {
     @apply stroke-red-400;
+  }
+  @screen sm {
+    .markdown {
+      @apply text-base;
+    }
+    .markdown h1,
+    .markdown h2 {
+      @apply text-2xl;
+    }
+    .markdown h3,
+    .markdown h4,
+    .markdown h5,
+    .markdown h6 {
+      @apply text-xl;
+    }
+  }
+  @screen lg {
+    .markdown {
+      @apply text-lg;
+    }
+  }
+  .markdown {
+    @apply leading-relaxed text-sm;
+  }
+  .markdown h1,
+  .markdown h2 {
+    @apply text-xl my-6 font-semibold;
+  }
+  .markdown h3,
+  .markdown h4,
+  .markdown h5,
+  .markdown h6 {
+    @apply text-lg my-3 font-semibold;
+  }
+  .markdown a {
+    @apply text-purple-500;
+  }
+  .markdown a:hover {
+    @apply underline;
+  }
+  .markdown p {
+    @apply mb-4;
+  }
+  .markdown ul,
+  .markdown ol {
+    @apply mb-4 ml-8;
+  }
+  .markdown li > p,
+  .markdown li > ul,
+  .markdown li > ol {
+    @apply mb-0;
+  }
+  .markdown ol {
+    @apply list-decimal;
+  }
+  .markdown ul {
+    @apply list-disc;
+  }
+  .markdown blockquote {
+    @apply p-2 mx-6 bg-zinc-600 mb-4 border-l-4 border-zinc-700 italic;
+  }
+  .markdown blockquote > p {
+    @apply mb-0;
+  }
+  .markdown td,
+  .markdown th {
+    @apply px-2 py-1 border border-gray-400;
+  }
+  .markdown tr:nth-child(odd) {
+    @apply bg-gray-100;
+  }
+  .markdown table {
+    @apply mb-6;
   }
 }
 
 .Blue {
-  color: #57a5ff;
+  color: var(--blue);
 }
 
 .LightBlue {
-  color: #5cd9ff;
+  color: var(--light-blue);
 }
 
 .Red {
-  color: #ff6666;
+  color: var(--red);
 }
 
 .Yellow {
-  color: #ffcb6b;
+  color: var(--yellow);
 }
 
 .Green {
-  color: #57ff73;
+  color: var(--green);
 }
 
 .Pink {
-  color: #ff75c1;
+  color: var(--pink);
 }
 
 .Grey {
-  color: #919191;
+  color: var(--grey);
 }
 
 .Multi {
@@ -52,55 +145,55 @@
 }
 
 .Multi.Yellow-Green {
-  background: linear-gradient(100deg, #ffcb6b 0%, #57ff73 100%);
+  background: linear-gradient(100deg, var(--yellow) 0%, var(--green) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Green-LightBlue {
-  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 100%);
+  background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Yellow-Green-Grey {
-  background: linear-gradient(100deg, #ffcb6b 0%, #57ff73 50%, #919191 100%);
+  background: linear-gradient(100deg, var(--yellow) 0%, var(--green) 50%, var(--grey) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Green-Grey {
-  background: linear-gradient(100deg, #57ff73 0%, #919191 100%);
+  background: linear-gradient(100deg, var(--green) 0%, var(--grey) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Pink-Green-LightBlue {
-  background: linear-gradient(100deg, #ff75c1 0%, #57ff73 50%, #5cd9ff 100%);
+  background: linear-gradient(100deg, var(--pink) 0%, var(--green) 50%, var(--light-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Pink-Green-LightBlue-Blue {
-  background: linear-gradient(100deg, #ff75c1 0%, #57ff73 33%, #5cd9ff 66%, #57a5ff 100%);
+  background: linear-gradient(100deg, var(--pink) 0%, var(--green) 33%, var(--light-blue) 66%, var(--blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.LightBlue-Pink-Yellow-Blue-Red {
-  background: linear-gradient(100deg, #5cd9ff 0%, #ff75c1 25%, #ffcb6b 50%, #57a5ff 75%, #ff6666 100%);
+  background: linear-gradient(100deg, var(--light-blue) 0%, var(--pink) 25%, var(--yellow) 50%, var(--blue) 75%, var(--red) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Green-LightBlue-Pink-Yellow-Grey-Blue-Red {
-  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 16%, #ff75c1 33%, #ffcb6b 50%, #57a5ff 66%, #ff6666 83%, #919191 100%);
+  background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 16%, var(--pink) 33%, var(--yellow) 50%, var(--blue) 66%, var(--red) 83%, var(--grey) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .Multi.Green-LightBlue-Yellow-Grey-Blue-Red {
-  background: linear-gradient(100deg, #57ff73 0%, #5cd9ff 25%, #ffcb6b 50%, #57a5ff 75%, #919191 100%);
+  background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 25%, var(--yellow) 50%, var(--blue) 75%, var(--grey) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
