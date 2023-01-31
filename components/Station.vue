@@ -56,8 +56,11 @@ onBeforeMount(() => opened.value = false);
                     </span>
                     )
                 </span>
-                <h2 :class="{ [resolve_colour(station.services.lines)]: true }">
-                    {{ station.name }}
+                <h2>
+                    <NuxtLink :to="`/stations/${station.code}`"
+                        :class="{ [resolve_colour(station.services.lines)]: true }">
+                        {{ station.name }}
+                    </NuxtLink>
                 </h2>
             </div>
         </div>

@@ -9,6 +9,26 @@ const { data: article, error } = await useAsyncData('article', () => queryConten
         back_link="/articles" />
     <Loader v-else-if="!article && !error" />
 
-    <ContentRenderer v-if="article" :value="article" class="markdown"/>
+    <div v-if="article && !article.error" class="
+        w-full 
+        flex justify-center
+    ">
+        <div class="
+            w-[70rem] max-w-full
+        ">
+            <div class="
+                mb-4
+            ">
+                <h1 class="
+                    text-2xl font-bold
+                    text-purple-400
+                ">
+                    {{ article.title }}
+                </h1>
+                <ContentRenderer v-if="article" :value="article" class="markdown" />
+            </div>
+        </div>
+    </div>
+
 
 </template>
