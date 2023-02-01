@@ -16,15 +16,30 @@ const { data: article, error } = await useAsyncData('article', () => queryConten
         <div class="
             w-[70rem] max-w-full
         ">
-            <div class="
-                mb-4
-            ">
+            <div>
                 <h1 class="
                     text-2xl font-bold
                     text-purple-400
                 ">
                     {{ article.title }}
                 </h1>
+                <p>
+                    {{ article.description }}
+                </p>
+                <div class="
+                    text-sm
+                    flex items-center space-x-2
+                    child:flex child:items-center child:space-x-2
+                ">
+                    <div>
+                        <Icon name="tabler:user" />
+                        {{ article.author }}
+                    </div>
+                    <div>
+                        <Icon name="tabler:calendar" />
+                        {{ new Date(article.date||Date.now()).toLocaleDateString() }}
+                    </div>
+                </div>
                 <ContentRenderer v-if="article" :value="article" class="markdown" />
             </div>
         </div>

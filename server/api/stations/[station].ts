@@ -1,4 +1,4 @@
-import { resolve_code } from "~~/databank/Stations";
+import { resolve_code, Station } from "~~/databank/Stations";
 
 export default defineEventHandler(event => {
 

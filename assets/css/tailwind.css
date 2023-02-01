@@ -95,7 +95,9 @@ html.dark {
     @apply list-disc;
   }
   .markdown blockquote {
-    @apply p-2 mx-6 bg-zinc-600 mb-4 border-l-4 border-zinc-700 italic;
+    @apply p-2 mx-6 mb-4 border-l-4 italic;
+    @apply bg-zinc-100 border-zinc-300;
+    @apply dark:bg-zinc-600 dark:border-zinc-700;
   }
   .markdown blockquote > p {
     @apply mb-0;
@@ -113,31 +115,31 @@ html.dark {
 }
 
 .Blue {
-  color: var(--blue);
+  color: var(--blue) !important;
 }
 
 .LightBlue {
-  color: var(--light-blue);
+  color: var(--light-blue) !important;
 }
 
 .Red {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .Yellow {
-  color: var(--yellow);
+  color: var(--yellow) !important;
 }
 
 .Green {
-  color: var(--green);
+  color: var(--green) !important;
 }
 
 .Pink {
-  color: var(--pink);
+  color: var(--pink) !important;
 }
 
 .Grey {
-  color: var(--grey);
+  color: var(--grey) !important;
 }
 
 .Multi {
@@ -194,6 +196,30 @@ html.dark {
 
 .Multi.Green-LightBlue-Yellow-Grey-Blue-Red {
   background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 25%, var(--yellow) 50%, var(--blue) 75%, var(--grey) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-LightBlue-Pink-Grey-Blue {
+  background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 25%, var(--pink) 50%, var(--blue) 75%, var(--grey) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-LightBlue-Pink-Yellow-Grey-Blue {
+  background: linear-gradient(100deg, var(--green) 0%, var(--light-blue) 16%, var(--pink) 33%, var(--yellow) 50%, var(--blue) 66%, var(--grey) 83%, var(--grey) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.LightBlue-Pink-Yellow-Blue-Red-Green-Grey {
+  background: linear-gradient(100deg, var(--light-blue) 0%, var(--pink) 14%, var(--yellow) 28%, var(--blue) 42%, var(--red) 56%, var(--green) 70%, var(--grey) 84%, var(--grey) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Multi.Green-Yellow-Grey {
+  background: linear-gradient(100deg, var(--green) 0%, var(--yellow) 50%, var(--grey) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

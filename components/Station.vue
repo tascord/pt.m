@@ -1,12 +1,13 @@
-<script setup>
-import { resolve_colour } from '~~/databank/Stations';
-const opened = ref(false);
+<script setup lang="ts">
+import { resolve_colour, resolve_group, Station, Stop } from '~~/databank/Stations';
 
 const styles = {
     opened: {
         'rotate-90': true,
         'heir:fill-purple-400': true,
         'heir:stroke-purple-400': true,
+        'dark:heir:fill-purple-400': true,
+        'dark:heir:stroke-purple-400': true,
     },
     default: {
         'heir:fill-zinc-600': true,
@@ -16,9 +17,14 @@ const styles = {
     }
 }
 
-// On unmount, close the dropdown
-onBeforeUnmount(() => opened.value = false);
-onBeforeMount(() => opened.value = false);
+const {} = defineProps<{
+    station: Station|Stop,
+    opened: boolean,
+    open: () => void,
+    close: () => void,
+}>();
+
+
 
 </script>
 
@@ -29,7 +35,7 @@ onBeforeMount(() => opened.value = false);
         <div class="
             flex
         ">
-            <button @click="() => opened = !opened" class="
+            <button @click="opened ? close() : open()" class="
                 mr-2
                 grid place-items-center
             ">
@@ -67,12 +73,16 @@ onBeforeMount(() => opened.value = false);
         <div :style="`display: ${!opened ? 'none' : 'flex'}; margin-bottom: ${!opened ? 0 : '1rem'} `" class="
             space-x-4
             child:child-div:flex child:child-div:flex-col
+            heir-h2:font-bold heir-h2:text-lg
+            child:child-div:font-semibold
             mt-1 lg:ml-[4.75rem]
         ">
             <div>
                 <h2>Group{{ station.services.groups.length === 1 ? '' : 's' }}</h2>
                 <div>
-                    <NuxtLink v-for="group in station.services.groups" :to="`/groups/${group} `">
+                    <NuxtLink v-for="group in station.services.groups" :to="`/groups/${group}`" :class="{
+                        [resolve_colour(resolve_group(group))]: true
+                    }">
                         {{ group }}
                     </NuxtLink>
                 </div>
@@ -81,8 +91,9 @@ onBeforeMount(() => opened.value = false);
             <div>
                 <h2>Line{{ station.services.lines.length === 1 ? '' : 's' }}</h2>
                 <div>
-                    <NuxtLink v-for="line in station.services.lines" :to="`/lines/${line} `"
-                        :class="{ [resolve_colour([line])]: true }">
+                    <NuxtLink v-for="line in station.services.lines" :to="`/lines/${line}`" :class="{
+                        [resolve_colour([line])]: true
+                    }">
                         {{ line }}
                     </NuxtLink>
                 </div>
@@ -91,8 +102,8 @@ onBeforeMount(() => opened.value = false);
             <div>
                 <h2>Zone{{ station.zone.length === 1 ? '' : 's' }}</h2>
                 <div>
-                    <NuxtLink v-for="line in station.zone" :to="`/zones/${line}`">
-                        {{ line }}
+                    <NuxtLink v-for="zone in station.zone" :to="`/zones/${zone}`">
+                        {{ zone }}
                     </NuxtLink>
                 </div>
             </div>
@@ -106,17 +117,3 @@ onBeforeMount(() => opened.value = false);
         </div>
     </div>
 </template>
-
-<script>
-
-export default {
-    name: 'Station',
-    props: {
-        station: {
-            type: Object,
-            required: true
-        }
-    }
-}
-
-</script>

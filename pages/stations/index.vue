@@ -3,7 +3,8 @@ import type { Station } from '~~/databank/Stations';
 const { pending, data } = useAsyncData('stations', () => $fetch(`/api/stations`));
 
 const query = ref("");
-const stations = ref([]);
+const stations = ref([] as Station[]);
+const opened = ref("");
 
 // Filter stations as query changes
 watch(query, () => {
@@ -26,7 +27,7 @@ watch(query, () => {
     } else {
         stations.value = data.value as any;
     }
-});
+}, { immediate: true });
 
 // On data change, update stations
 watch(data, () => stations.value = data.value as any);
@@ -56,13 +57,13 @@ watch(data, () => stations.value = data.value as any);
                 flex justify-center
                 h-8
             ">
-                <form @submit="e => e.preventDefault()" class="
+                <div class="
                     px-2
                     w-full max-w-[30rem]
                     flex justify-center items-center space-x-2
                     outline-black dark:outline-white outline-2 outline
                     rounded-xl shadow-xl
-                    focus:outline-purple-400
+                    focus-within:outline-purple-500 dark:focus-within:outline-purple-400
                 ">
                     <input type="text" placeholder="Search" v-model="query" class="
                         flex-1
@@ -71,7 +72,7 @@ watch(data, () => stations.value = data.value as any);
                         focus:outline-none
                     " />
                     <Icon name="tabler:search" />
-                </form>
+                </div>
             </div>
         </div>
 
@@ -81,7 +82,7 @@ watch(data, () => stations.value = data.value as any);
             grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
         ">
             <div v-for="station in stations">
-                <Station :station="station" />
+                <Station :station="station" :opened="opened === station.code" :close="() => opened = ''" :open="() => opened = station.code"/>
             </div>
         </div>
 

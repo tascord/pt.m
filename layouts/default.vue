@@ -52,6 +52,7 @@
                 </nav>
             </div>
         </div>
+        <Floating />
         <main class="
             px-[10vw] pt-12
             text-black dark:text-white

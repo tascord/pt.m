@@ -1,5 +1,5 @@
 import { Lines } from "~~/databank/Lines";
-import { resolve_code, resolve_name, Station, Stop } from "~~/databank/Stations";
+import { resolve_code, resolve_name, Stop } from "~~/databank/Stations";
 
 export default defineEventHandler(event => {
 

@@ -1133,8 +1133,7 @@ export const Stations = [
                 "Craigieburn"
             ],
             "groups": [
-                "City",
-                "Loop"
+                "City Loop"
             ]
         },
         "zone": [
@@ -1197,8 +1196,7 @@ export const Stations = [
                 "Craigieburn"
             ],
             "groups": [
-                "City",
-                "Loop"
+                "City Loop"
             ]
         },
         "zone": [
@@ -2057,8 +2055,7 @@ export const Stations = [
                 "Craigieburn"
             ],
             "groups": [
-                "City",
-                "Loop"
+                "City Loop"
             ]
         },
         "zone": [
@@ -2672,8 +2669,7 @@ export const Stations = [
                 "Craigieburn"
             ],
             "groups": [
-                "City",
-                "Loop"
+                "City Loop"
             ]
         },
         "zone": [
@@ -3146,8 +3142,7 @@ export const Stations = [
                 "Craigieburn"
             ],
             "groups": [
-                "City",
-                "Loop"
+                "City Loop"
             ]
         },
         "zone": [
@@ -3772,6 +3767,8 @@ export type StationZone = typeof Stations[number]["zone"];
 
 export type Station = typeof Stations[number];
 export type Line = typeof Stations[number]["services"]["lines"][number];
+export type Group = typeof Stations[number]["services"]["groups"][number];
+
 export type Stop = Station & { priority: number };
 
 export function resolve_code(code: StationCode) {
@@ -3781,14 +3778,6 @@ export function resolve_code(code: StationCode) {
 export function resolve_name(name: StationName) {
     return Stations.find((s) => s.name.toLowerCase() === name.toLowerCase());
 }
-
-export const CityLoop: StationCode[] = [
-    'SSS', // Southern Cross
-    'FSS', // Flinders Street
-    'MCE', // Melbourne Central
-    'PAR', // Parliament
-    'FGS', // Flagstaff
-]
 
 const LineColours = [
     'Blue',
@@ -3811,8 +3800,16 @@ export const ColourMap: { [colour in LineColour]: Line[] } = {
     'Grey': ['Stony Point', 'Flemington Racecourse'],
 };
 
-export function resolve_colour(lines: Line[]|Readonly<Line[]>) {
-    const colours = lines.map((line) => Object.entries(ColourMap).find(([, lines]) => lines.includes(line))?.[0]??line as LineColour).filter((v, i, a) => a.indexOf(v) === i);
+export function resolve_colour(lines: Line[] | Readonly<Line[]>) {
+    const colours = lines.map((line) => Object.entries(ColourMap).find(([, lines]) => lines.includes(line))?.[0] ?? line as LineColour).filter((v, i, a) => a.indexOf(v) === i);
     if (colours.length === 1) return colours[0];
     else return 'Multi ' + colours.join('-');
+}
+
+export function resolve_group(group: Group): Line[] {
+    return Stations.filter(s => (s.services.groups as Readonly<Group[]>).includes(group)).map(s => s.services.lines).flat();
+}
+
+export function is_city_loop(station: Station | Stop) {
+    return (station.services.groups as Readonly<Group[]>).includes('City Loop');
 }

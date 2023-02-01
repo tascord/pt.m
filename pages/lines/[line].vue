@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Priority from "~/databank/helpers/Priority";
-import { CityLoop, resolve_colour, resolve_name } from "~/databank/Stations";
+import { is_city_loop, resolve_colour, resolve_name, resolve_group } from "~/databank/Stations";
 
 const route = useRoute();
-const { pending, data: line, } = useAsyncData('lines', () => $fetch(`/api/lines/${route.params.line}`));
+const { pending, data: line } = await useAsyncData('lines', () => $fetch(`/api/lines/${route.params.line}`));
 const direction = ref('to_city');
 
 const priority_string = (priority_num: number) => {
@@ -49,8 +49,7 @@ const colour = (rating: number) => {
 
     <div v-if="line && !line.error">
         <div class="child-h1:text-3xl child-h1:text-bold">
-            <h1
-                :class="{ [resolve_colour(line.stops![0].services.lines)]: true, 'font-semibold': true }">
+            <h1 :class="{ [resolve_colour(line.stops![0].services.lines)]: true, 'font-semibold': true }">
                 {{ line.name }}
             </h1>
             <div class="
@@ -59,7 +58,9 @@ const colour = (rating: number) => {
             ">
                 <h2>
                     Part of the
-                    <NuxtLink v-for="group in line.stops![0].services.groups" :to="`/group/${group}`">
+                    <NuxtLink v-for="group in line.stops![0].services.groups" :to="`/group/${group}`" :class="{
+                        [resolve_colour(resolve_group(group))]: true
+                    }">
                         {{ group }}
                     </NuxtLink>
                     {{ line.stops![0].services.groups.length > 1 ? 'groups' : 'group' }},
@@ -87,13 +88,14 @@ const colour = (rating: number) => {
                         child:rounded-md
                         child:transition-all child:duration-200 child:ease-in-out
                         child-button:p-2
+                        text-black dark:text-white
                     ">
                         <button v-on:click="() => direction = 'to_city'"
-                            :class="(direction !== 'to_city' ? 'text-opacity-40' : 'bg-purple-500 text-opacity-100 px-2') + '  py-[0.15rem] shadow-xl'">
+                            :class="(direction !== 'to_city' ? 'text-opacity-40' : 'text-white bg-purple-500 text-opacity-100 px-2 shadow-xl') + '  py-[0.15rem]'">
                             <Icon name="tabler:building-skyscraper" /> To the City
                         </button>
                         <button v-on:click="() => direction = 'to_suburbs'"
-                            :class="(direction !== 'to_suburbs' ? 'text-opacity-40' : 'bg-purple-500 text-opacity-100 px-2') + ' py-[0.15rem] shadow-xl'">
+                            :class="(direction !== 'to_suburbs' ? 'text-opacity-40' : 'text-white bg-purple-500 text-opacity-100 px-2 shadow-xl') + ' py-[0.15rem]'">
                             <Icon name="tabler:building-community" /> To {{ line.name }}
                         </button>
                     </div>
@@ -106,7 +108,7 @@ const colour = (rating: number) => {
                                     :class="{ [`${colour(stop.priority)}`]: true, 'grid': true, 'place-items-center': true }">
                                     <Tooltip :text="priority_string(stop.priority)" icon="tabler:hand-stop" />
                                 </div>
-                                <Tooltip v-if="CityLoop.includes(stop.code)"
+                                <Tooltip v-if="is_city_loop(stop)"
                                     :text="stop.code === line.stops![line.stops!.length - 1].code ? 'City loop stop.' : 'City loop stop, skipped on direct services.'"
                                     icon="tabler:repeat" />
                             </div>
