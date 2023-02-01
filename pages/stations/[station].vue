@@ -3,7 +3,7 @@ import { Station } from '~~/databank/Stations';
 
 // TODO: Figure out why this cast is needed
 const { pending, data: station } = await useAsyncData<Station>('stations', () => $fetch(`/api/stations/${useRoute().params.station}`));
-const { error: article_error, data: articles } = await useAsyncData('articles', () => queryContent().where({ tags: String(useRoute().params.station).toLowerCase() }).find());
+const { error: article_error, data: articles } = await useAsyncData('articles', () => queryContent().find({ tags: String(useRoute().params.station).toUpperCase() }));
 </script>
 
 

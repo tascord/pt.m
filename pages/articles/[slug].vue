@@ -29,17 +29,30 @@ const { data: article, error } = await useAsyncData('article', () => queryConten
                 <div class="
                     text-sm
                     flex items-center space-x-2
-                    child:flex child:items-center child:space-x-2
+                    child:flex child:items-center child:space-x-1
                 ">
                     <div>
                         <Icon name="tabler:user" />
-                        {{ article.author }}
+                        <span>
+                            {{ article.author }}
+                        </span>
                     </div>
+
                     <div>
                         <Icon name="tabler:calendar" />
-                        {{ new Date(article.date||Date.now()).toLocaleDateString() }}
+                        <span>
+                            {{ new Date(article.date || Date.now()).toLocaleDateString() }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <Icon name="tabler:tag" />
+                        <NuxtLink v-for="tag in article.tags" :to="`/articles/tag/${tag}`">
+                            {{ tag + (tag !== article.tags[article.tags.length - 1] ? ',' : '') }}
+                        </NuxtLink>
                     </div>
                 </div>
+                <hr class="mt-2 mb-4"/>
                 <ContentRenderer v-if="article" :value="article" class="markdown" />
             </div>
         </div>

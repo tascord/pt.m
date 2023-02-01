@@ -1,20 +1,6 @@
 <script setup>
 const { tag } = useRoute().params;
 const { data: articles, error } = await useAsyncData('articles', () => queryContent().find({ tags: tag.toLowerCase() }));
-let tags = ref([]);
-
-watch(articles, () => {
-    if (articles) {
-        tags.value = [...articles.value].reduce((acc, article) => {
-            article.tags.forEach(tag => {
-                if (!acc.includes(tag)) {
-                    acc.push(tag);
-                }
-            });
-            return acc;
-        }, []);
-    }
-}, { immediate: true });
 
 </script>
 
