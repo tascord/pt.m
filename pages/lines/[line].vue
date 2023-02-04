@@ -4,6 +4,7 @@ import { is_city_loop, resolve_colour, resolve_name, resolve_group } from "~/dat
 
 const route = useRoute();
 const { pending, data: line } = await useAsyncData('lines', () => $fetch(`/api/lines/${route.params.line}`));
+const { pending: status_pending, data: status } = await useAsyncData('status', () => $fetch(`/api/lines/extended/${route.params.line}`));
 const direction = ref('to_city');
 
 const priority_string = (priority_num: number) => {
@@ -48,10 +49,14 @@ const colour = (rating: number) => {
         back_text="Back to lines" back_link="/lines" />
 
     <div v-if="line && !line.error">
-        <div class="child-h1:text-3xl child-h1:text-bold">
-            <h1 :class="{ [resolve_colour(line.stops![0].services.lines)]: true, 'font-semibold': true }">
-                {{ line.name }}
-            </h1>
+        <div class="heir-h1:text-3xl heir-h1:font-bold">
+            <div class="flex items-center space-x-2">
+                <Tooltip size="1.5rem" :icon="status_pending ? 'tabler:loader-2' : 'tabler:stethoscope'"
+                    :text="status.status?.description ?? 'Service Status Unknown'" :class="{ 'animate-spin': status_pending }" />
+                <h1 :class="{ [resolve_colour(line.stops![0].services.lines)]: true }">
+                    {{ line.name }}
+                </h1>
+            </div>
             <div class="
                 mt-1 dark:opacity-70
                 heir-a:font-semibold

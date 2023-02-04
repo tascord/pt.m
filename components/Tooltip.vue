@@ -1,20 +1,10 @@
-<script>
-export default {
-    props: {
-        text: {
-            type: String,
-            required: true
-        },
-        icon: {
-            type: String,
-            default: 'tabler:info-circle'
-        },
-        position: {
-            type: String,
-            default: 'left'
-        }
-    }
-}
+<script setup lang="ts">
+defineProps<{
+    text: string;
+    icon: string;
+    position?: 'left' | 'center';
+    size?: string;
+}>();
 </script>
 
 <template>
@@ -23,14 +13,14 @@ export default {
             relative group
             grid place-items-center
         ">
-        <Icon :name="icon" class="
+        <Icon :size="size ?? '1rem'" :name="icon" class="
             child:stroke-black dark:child:stroke-white
             group-hover:child:stroke-purple-400
             transition-all duration-200 ease-in-out
             cursor-pointer
             opacity-50 group-hover:opacity-100
         " />
-        <span v-if="position === 'left'" class="
+        <span v-if="position !== 'center'" class="
             scale-0 group-hover:scale-100
             origin-top-left transition-all duration-200 ease-in-out
             absolute top-[1.75rem] left-[0.25rem]
