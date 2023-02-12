@@ -3776,7 +3776,9 @@ export function resolve_code(code: StationCode) {
 }
 
 export function resolve_name(name: StationName) {
-    return Stations.find((s) => s.name.toLowerCase() === name.toLowerCase());
+    const sanitize = (x: string) => x.replace(/[^a-z]/gi, '').toLowerCase();
+    const sanitized = sanitize(name);
+    return Stations.find((s) => sanitize(s.name) === sanitized);
 }
 
 const LineColours = [
