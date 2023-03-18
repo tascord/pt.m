@@ -15,7 +15,8 @@ export default defineEventHandler(event => {
 
     return {
         name: stops[0].name,
-        stops
+        stops,
+        verified: line.verified
     }
 
 })

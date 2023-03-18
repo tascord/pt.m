@@ -4,13 +4,13 @@
 
 html {
 
-    --blue: hsl(212, 100%, 59%);
-    --light-blue: hsl(194, 100%, 59%);
-    --red: hsl(0, 100%, 62%);
-    --yellow: hsl(39, 100%, 56%);
-    --green: hsl(130, 69%, 52%);
-    --pink: hsl(327, 100%, 63%);
-    --grey: hsl(0, 0%, 44%);
+    --blue: #2e8fff;
+    --light-blue: #2eceff;
+    --red: #ff3d3d;
+    --yellow: #ffb01f;
+    --green: #30d94c;
+    --pink: #ff42aa;
+    --grey: #707070;
 
     &.dark {
         --blue: hsl(212, 100%, 67%);
@@ -34,16 +34,16 @@ html {
         @apply text-white dark:text-white hover:text-purple-400;
     }
 
-    .Service-Most>div>svg>g {
-        @apply stroke-green-400;
+    .Service-Most {
+        @apply heir:stroke-green-400;
     }
 
-    .Service-Some>div>svg>g {
-        @apply stroke-orange-400;
+    .Service-Some {
+        @apply heir:stroke-orange-400;
     }
 
-    .Service-Poor>div>svg>g {
-        @apply stroke-red-400;
+    .Service-Poor {
+        @apply heir:stroke-red-400;
     }
 
     // Markdown Reset
@@ -140,6 +140,41 @@ html {
 
         table {
             @apply mb-6;
+        }
+    }
+
+    // Lists
+
+    .list {
+
+        @apply child:font-bold;
+        max-width: calc(100vw - 20vw);
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        
+        :first-child {
+            @apply ml-1;
+        }
+
+        :last-child {
+            @apply mr-1;
+        }
+
+        :not(:last-child)::after {
+            content: ',';
+            @apply mr-1;
+            @apply dark:bg-white bg-black;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        :not(:first-child):last-child::before {
+            content: 'and';
+            @apply mr-1;
+            @apply dark:bg-white bg-black;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     }
 

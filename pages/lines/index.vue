@@ -1,5 +1,6 @@
 <script setup>
-const { pending, data: lines, } = useAsyncData('lines', () => $fetch('/api/lines'));
+import sanitize from "~/helpers/Clean";
+const { pending, data: lines } = useAsyncData('lines', () => $fetch('/api/lines'));
 </script>
 
 <template>
@@ -32,7 +33,7 @@ const { pending, data: lines, } = useAsyncData('lines', () => $fetch('/api/lines
 
                 <ul>
                     <li v-for="line in lines">
-                        <NuxtLink :to="`/lines/${line}`">
+                        <NuxtLink :to="`/lines/${sanitize(line)}`">
                             {{ line }}
                         </NuxtLink>
                     </li>

@@ -25,7 +25,7 @@ defineProps<{
             origin-top-left transition-all duration-200 ease-in-out
             absolute top-[1.75rem] left-[0.25rem]
             text-xs text-black dark:text-white
-            bg-white dark:bg-zinc-800
+            bg-zinc-100 dark:bg-zinc-800
             px-4 py-1
             rounded-md rounded-tl-none
             shadow-xl
@@ -35,7 +35,7 @@ defineProps<{
         ">
             <Icon name="tabler:arrow-badge-up" size="1rem" class="
                 dark:child:fill-zinc-800 dark:child:stroke-zinc-800
-                child:fill-white child:stroke-white
+                child:fill-zinc-100 child:stroke-zinc-100
                 absolute top-[-0.5rem] left-[-0.25rem]
             " />
             {{ text }}

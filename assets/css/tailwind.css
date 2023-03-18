@@ -28,14 +28,14 @@ html.dark {
   nav a {
     @apply text-white dark:text-white hover:text-purple-400;
   }
-  .Service-Most > div > svg > g {
-    @apply stroke-green-400;
+  .Service-Most {
+    @apply heir:stroke-green-400;
   }
-  .Service-Some > div > svg > g {
-    @apply stroke-orange-400;
+  .Service-Some {
+    @apply heir:stroke-orange-400;
   }
-  .Service-Poor > div > svg > g {
-    @apply stroke-red-400;
+  .Service-Poor {
+    @apply heir:stroke-red-400;
   }
   @screen sm {
     .markdown {
@@ -111,6 +111,36 @@ html.dark {
   }
   .markdown table {
     @apply mb-6;
+  }
+  .list {
+    @apply child:font-bold;
+    max-width: calc(100vw - 20vw);
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .list :first-child {
+    @apply ml-1;
+  }
+  .list :last-child {
+    @apply mr-1;
+  }
+  .list :not(:last-child)::after {
+    content: ',';
+    @apply mr-1;
+    @apply dark:bg-white bg-black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .list :not(:first-child):last-child::before {
+    content: 'and';
+    @apply mr-1;
+    @apply dark:bg-white bg-black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 

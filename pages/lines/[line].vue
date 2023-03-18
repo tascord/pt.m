@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Priority from "~/databank/helpers/Priority";
-import { is_city_loop, resolve_colour, resolve_name, resolve_group } from "~/databank/Stations";
+import { is_city_loop, resolve_colour, resolve_group } from "~/databank/Stations";
+import sanitize from "~/helpers/Clean";
 
 const route = useRoute();
 const { pending, data: line } = await useAsyncData('lines', () => $fetch(`/api/lines/${route.params.line}`));
@@ -43,7 +44,6 @@ const colour = (rating: number) => {
 </script>
 
 <template>
-
     <Loader v-if="pending" />
     <Error v-if="line && line.error" title="Unable to load line information" :description="line.error"
         back_text="Back to lines" back_link="/lines" />
@@ -52,32 +52,28 @@ const colour = (rating: number) => {
         <div class="heir-h1:text-3xl heir-h1:font-bold">
             <div class="flex items-center space-x-2">
                 <Tooltip size="1.5rem" :icon="status_pending ? 'tabler:loader-2' : 'tabler:stethoscope'"
-                    :text="status.status?.description ?? 'Service Status Unknown'" :class="{ 'animate-spin': status_pending }" />
+                    :text="status.status?.description ?? 'Service Status Unknown'"
+                    :class="{ 'animate-spin': status_pending, [status.status?.description === 'Good Service' ? 'Service-Most' : 'Service-Some']: true }" />
                 <h1 :class="{ [resolve_colour(line.stops![0].services.lines)]: true }">
                     {{ line.name }}
                 </h1>
             </div>
             <div class="
-                mt-1 dark:opacity-70
-                heir-a:font-semibold
-            ">
-                <h2>
+                    mt-1 dark:opacity-70
+                    heir-a:font-semibold heir:m-0
+                    flex items-center space-x-2
+                ">
+                <span class="list">
                     Part of the
-                    <NuxtLink v-for="group in line.stops![0].services.groups" :to="`/group/${group}`" :class="{
+                    <NuxtLink v-for="group in line.stops![0].services.groups" :to="`/group/${sanitize(group)}`" :class="{
                         [resolve_colour(resolve_group(group))]: true
                     }">
                         {{ group }}
                     </NuxtLink>
-                    {{ line.stops![0].services.groups.length > 1 ? 'groups' : 'group' }},
-
-                    servicing the
-                    <NuxtLink v-for="sub_line in line.stops![0].services.lines" :to="`/line/${sub_line}`" :class="
-                        { [resolve_colour(resolve_name(sub_line)!.services.lines)]: true }
-                    ">
-                        {{ sub_line }}
-                    </NuxtLink>
-                    {{ line.stops![0].services.lines.length > 1 ? 'lines' : 'line' }}
-                </h2>
+                    {{ line.stops![0].services.groups.length > 1 ? 'groups' : 'group' }}.
+                </span>
+                <Tooltip v-if="!line.verified" icon="tabler:info-circle"
+                    text="Some of this information has yet to be verified." class="mt-1" />
             </div>
         </div>
         <hr class="my-2 border-purple-400 border-opacity-70" />
@@ -88,13 +84,13 @@ const colour = (rating: number) => {
                         Stops along the {{ line.name }} line
                     </h2>
                     <div class="
-                        space-x-4
-                        text-xs
-                        child:rounded-md
-                        child:transition-all child:duration-200 child:ease-in-out
-                        child-button:p-2
-                        text-black dark:text-white
-                    ">
+                            space-x-4
+                            text-xs
+                            child:rounded-md
+                            child:transition-all child:duration-200 child:ease-in-out
+                            child-button:p-2
+                            text-black dark:text-white
+                        ">
                         <button v-on:click="() => direction = 'to_city'"
                             :class="(direction !== 'to_city' ? 'text-opacity-40' : 'text-white bg-purple-500 text-opacity-100 px-2 shadow-xl') + '  py-[0.15rem]'">
                             <Icon name="tabler:building-skyscraper" /> To the City

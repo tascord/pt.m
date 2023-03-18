@@ -1,7 +1,7 @@
 <template>
     <div class="
         w-[100vw] min-h-[100vh] pb-4
-        bg-white dark:bg-zinc-900
+        bg-orange-50 dark:bg-zinc-900
     ">
         <!-- Header -->
         <div class="w-full flex justify-center">

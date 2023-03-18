@@ -14,7 +14,7 @@ export default defineEventHandler(event => {
 
     const processed = new Promise(async (resolve) => {
         const routes = await Api.routes();
-        resolve(routes.routes.find(r => r.route_name === (line.line_name || resolve_code(line.stops[0].code)!.name))!)
+        resolve(routes.find(r => r.route_name === (line.line_name || resolve_code(line.stops[0].code)!.name))!)
     });
 
     return Api.wrap(event, processed);

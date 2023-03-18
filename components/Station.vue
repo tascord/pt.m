@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import sanitize from '~~/helpers/Clean';
 import { resolve_colour, resolve_group, Station, Stop } from '~~/databank/Stations';
 
 const styles = {
     opened: {
         'rotate-90': true,
-        'heir:fill-purple-400': true,
-        'heir:stroke-purple-400': true,
-        'dark:heir:fill-purple-400': true,
-        'dark:heir:stroke-purple-400': true,
+        'heir-svg:fill-purple-400': true,
+        'heir-svg:stroke-purple-400': true,
+        'dark:heir-svg:fill-purple-400': true,
+        'dark:heir-svg:stroke-purple-400': true,
     },
     default: {
-        'heir:fill-zinc-600': true,
-        'heir:stroke-zinc-600': true,
+        'heir-svg:fill-zinc-600': true,
+        'heir-svg:stroke-zinc-600': true,
         'heir:transition-all': true,
         'transition-transform': true,
     }
@@ -80,7 +81,7 @@ const {} = defineProps<{
             <div>
                 <h2>Group{{ station.services.groups.length === 1 ? '' : 's' }}</h2>
                 <div>
-                    <NuxtLink v-for="group in station.services.groups" :to="`/groups/${group}`" :class="{
+                    <NuxtLink v-for="group in station.services.groups" :to="`/groups/${sanitize(group)}`" :class="{
                         [resolve_colour(resolve_group(group))]: true
                     }">
                         {{ group }}
@@ -91,7 +92,7 @@ const {} = defineProps<{
             <div>
                 <h2>Line{{ station.services.lines.length === 1 ? '' : 's' }}</h2>
                 <div>
-                    <NuxtLink v-for="line in station.services.lines" :to="`/lines/${line}`" :class="{
+                    <NuxtLink v-for="line in station.services.lines" :to="`/lines/${sanitize(line)}`" :class="{
                         [resolve_colour([line])]: true
                     }">
                         {{ line }}
